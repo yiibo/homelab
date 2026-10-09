@@ -1,0 +1,30 @@
+version: "3.8"
+
+networks:
+    homelab:
+        external: true
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+    homepage:
+        image: ghcr.io/gethomepage/homepage:latest
+        container_name: homepage
+        ports:
+            - 3000:3000
+        volumes:
+            - ./config:/app/config # Make sure your local config directory exists
+            - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
+        environment:
+            HOMEPAGE_ALLOWED_HOSTS: gondor.lan # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+        networks:
+            homelab:
+                ipv4_address: 172.18.0.5
+        labels:
+            - "traefik.enable=true"
+            # This claims the root domain name
+            - "traefik.http.routers.homepage-router.rule=Host(`gondor.lan`)"
+            - "traefik.http.routers.homepage-router.entrypoints=web"
+            - "traefik.http.routers.homepage-router.service=homepage-service"
+            # Homepage listens internally on port 3000
+            - "traefik.http.services.homepage-service.loadbalancer.server.port=3000"
+            - "traefik.docker.network=homelab"

@@ -1,0 +1,18 @@
+turn_off_air_con_in_bedroom:
+  sequence:
+  - action: climate.turn_off
+    metadata: {}
+    target:
+      device_id: eea706b2318bde1a9c660574a32de4e1
+    data: {}
+  alias: turn off air con in bedroom
+  description: ''
+turn_off_air_con_bedroom:
+  sequence:
+  - action: climate.turn_off
+    metadata: {}
+    target:
+      device_id: eea706b2318bde1a9c660574a32de4e1
+    data: {}
+  alias: turn off air con bedroom
+  description: ''

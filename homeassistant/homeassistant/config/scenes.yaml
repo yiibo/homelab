@@ -1,0 +1,113 @@
+- id: '1780401567538'
+  name: Pre-bedtime
+  entities:
+    sensor.bedroom_1_accounts:
+      unit_of_measurement: Accounts
+      icon: mdi:account-group
+      friendly_name: Bedroom 1 Accounts
+      state: '2'
+    climate.bedroom_1:
+      hvac_modes:
+      - 'off'
+      - auto
+      - cool
+      - dry
+      - heat
+      - fan_only
+      min_temp: 16
+      max_temp: 30
+      fan_modes:
+      - auto
+      - Quiet
+      - low
+      - medium
+      - high
+      swing_modes:
+      - Up/Down Auto
+      - Highest
+      - Middle
+      - Normal
+      - Lowest
+      - 3D Auto
+      swing_horizontal_modes:
+      - Left/Right Auto
+      - Left-Left
+      - Left-Center
+      - Center-Center
+      - Center-Right
+      - Right-Right
+      - Left-Right
+      - Right-Left
+      - 3D Auto
+      friendly_name: Bedroom 1
+      supported_features: 937
+      current_temperature: 22.2
+      temperature: 22.5
+      fan_mode: Quiet
+      hvac_action: heating
+      swing_mode: Middle
+      swing_horizontal_mode: Center-Center
+      state: heat
+    sensor.bedroom_1_device_id:
+      friendly_name: Bedroom 1 Device ID
+      state: homeassistant-device-ba8af6e3d0e
+    sensor.bedroom_1_energy_usage_cycle:
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      device_class: energy
+      friendly_name: Bedroom 1 Energy usage cycle
+      state: '0.0'
+    select.bedroom_1_fan_speed:
+      options:
+      - auto
+      - Quiet
+      - low
+      - medium
+      - high
+      icon: mdi:fan
+      friendly_name: Bedroom 1 Fan speed
+      state: Quiet
+    select.bedroom_1_horizontal_swing_direction:
+      options:
+      - Left/Right Auto
+      - Left-Left
+      - Left-Center
+      - Center-Center
+      - Center-Right
+      - Right-Right
+      - Left-Right
+      - Right-Left
+      - 3D Auto
+      icon: mdi:weather-dust
+      friendly_name: Bedroom 1 Horizontal swing direction
+      state: Center-Center
+    sensor.bedroom_1_indoor:
+      state_class: measurement
+      unit_of_measurement: °C
+      device_class: temperature
+      friendly_name: Bedroom 1 Indoor
+      state: '22.2'
+    sensor.bedroom_1_ip:
+      friendly_name: Bedroom 1 IP
+      state: 192.168.0.44
+    sensor.bedroom_1_operator_id:
+      friendly_name: Bedroom 1 Operator ID
+      state: hassio-a-b52b-4c20-9ea0-d226c32f999c
+    sensor.bedroom_1_outdoor:
+      state_class: measurement
+      unit_of_measurement: °C
+      device_class: temperature
+      friendly_name: Bedroom 1 Outdoor
+      state: '13.2'
+    select.bedroom_1_vertical_swing_direction:
+      options:
+      - Up/Down Auto
+      - Highest
+      - Middle
+      - Normal
+      - Lowest
+      - 3D Auto
+      icon: mdi:weather-dust
+      friendly_name: Bedroom 1 Vertical swing direction
+      state: Middle
+  metadata: {}

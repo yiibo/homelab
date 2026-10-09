@@ -1,0 +1,102 @@
+# Homelab
+# Track compose files and hand-written config.
+# Leave out secrets, databases, logs, caches, and generated app data.
+
+# OS and editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Local env files
+.env
+.env.*
+*.env
+
+# Secrets, keys, and certificates
+*.key
+*.pem
+*.crt
+*.der
+*.p12
+*.pfx
+**/privatekey*
+cli_pw
+secrets.yaml
+jellyfins/yibo.pub
+
+# Databases and process files
+*.db
+*.db-*
+*.db.*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.pid
+*.lock
+*.fault
+
+# Logs
+*.log
+*.log.*
+log/
+logs/
+
+# Backups and copied config that still contains secrets
+backups/
+Backups/
+*.bak
+*.bak[0-9]*
+*backup*
+
+# Caches, installs, and local runtime
+.cache/
+__pycache__/
+node_modules/
+containerd/
+*.torrent
+*.fastresume
+*.mmdb
+
+# Home Assistant: auth store, third-party installs, and runtime
+homeassistant/homeassistant/config/.storage/
+homeassistant/homeassistant/config/.cloud/
+homeassistant/homeassistant/config/deps/
+homeassistant/homeassistant/config/tts/
+homeassistant/homeassistant/config/custom_components/
+homeassistant/matter-data/
+homeassistant/mosquitto/data/
+homeassistant/zigbee2mqtt/data/
+homeassistant/homeassistant/config/zigbee2mqtt/
+
+# Pi-hole: password hash, query data, blocklist cache, DHCP leases
+pihole/etc-pihole/pihole.toml
+pihole/etc-pihole/listsCache/
+pihole/etc-pihole/dhcp.leases
+pihole/etc-pihole/migration_backup/
+pihole/etc-pihole/migration_backup_v6/
+pihole/etc-pihole/config_backups/
+pihole/etc-pihole/gravity_backups/
+
+# WireGuard private keys, peer profiles, and QR codes.
+# templates/ and coredns/ stay tracked.
+pihole/config/wireguard/peer*/
+pihole/config/wireguard/server/
+pihole/config/wireguard/wg_confs/
+wireguard/config/wireguard/peer*/
+wireguard/config/wireguard/server/
+wireguard/config/wireguard/wg_confs/
+
+# Jellyfin library, metadata, and transcodes
+jellyfins/cache/
+jellyfins/config/data/
+jellyfins/config/metadata/
+jellyfins/config/transcodes/
+
+# *arr, SABnzbd, and qBittorrent: keep the compose file only.
+# App config holds API keys. The rest is database, logs, and downloads.
+servarr/*
+!servarr/docker-compose.yml

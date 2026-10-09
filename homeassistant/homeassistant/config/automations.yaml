@@ -1,0 +1,164 @@
+- id: '1780400655070'
+  alias: Turn on air con for sleep
+  description: ''
+  triggers:
+  - trigger: time
+    at: '21:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sun
+    - sat
+  conditions:
+  - type: is_temperature
+    condition: device
+    device_id: eea706b2318bde1a9c660574a32de4e1
+    entity_id: 50c5d9ef7bf00bc89f03d38eb18c4e5e
+    domain: sensor
+    metadata:
+      secondary: false
+    below: 18
+  actions:
+  - sequence:
+    - action: climate.set_temperature
+      metadata: {}
+      target:
+        device_id: eea706b2318bde1a9c660574a32de4e1
+      data:
+        temperature: 22
+        hvac_mode: heat
+    - action: climate.set_fan_mode
+      metadata: {}
+      target:
+        device_id: eea706b2318bde1a9c660574a32de4e1
+      data:
+        fan_mode: Quiet
+    - action: timer.start
+      metadata: {}
+      target:
+        entity_id: timer.heater_timer
+      data: {}
+    - action: climate.turn_off
+      metadata: {}
+      data: {}
+      target:
+        device_id: eea706b2318bde1a9c660574a32de4e1
+      enabled: false
+  mode: single
+- id: '1780401148036'
+  alias: Auto shutdown bedroom 1 air con
+  description: ''
+  triggers:
+  - trigger: time
+    at: 00:00:00
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  conditions: []
+  actions:
+  - action: climate.turn_off
+    metadata: {}
+    target:
+      device_id: eea706b2318bde1a9c660574a32de4e1
+    data: {}
+  mode: single
+- id: '1780401430823'
+  alias: Morning heater
+  description: ''
+  triggers:
+  - trigger: time
+    at: 05:30:00
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  conditions:
+  - type: is_temperature
+    condition: device
+    device_id: eea706b2318bde1a9c660574a32de4e1
+    entity_id: 50c5d9ef7bf00bc89f03d38eb18c4e5e
+    domain: sensor
+    below: 18
+  actions:
+  - sequence:
+    - action: climate.set_hvac_mode
+      metadata: {}
+      target:
+        device_id: eea706b2318bde1a9c660574a32de4e1
+      data:
+        hvac_mode: heat
+    - action: climate.set_fan_mode
+      metadata: {}
+      target:
+        device_id: eea706b2318bde1a9c660574a32de4e1
+      data:
+        fan_mode: low
+  mode: single
+- id: '1782122436700'
+  alias: Open Curtains when Sun Rises
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunrise
+    offset: 0
+  conditions: []
+  actions:
+  - action: cover.open_cover
+    metadata: {}
+    target:
+      entity_id:
+      - cover.living_room_blind_small_a_control
+      - cover.living_room_blinds_zigbee_main
+    data: {}
+  mode: single
+- id: '1782122630611'
+  alias: Close Curtain when Sun Sets
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: 0
+  conditions: []
+  actions:
+  - action: cover.close_cover
+    metadata: {}
+    target:
+      entity_id:
+      - cover.living_room_blind_small_a_control
+      - cover.living_room_blinds_zigbee_main
+    data: {}
+  mode: single
+- id: '1782221325037'
+  alias: Turn off bedroom air con morning
+  description: ''
+  triggers:
+  - trigger: time
+    at: 07:30:00
+    weekday:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+  conditions: []
+  actions:
+  - action: climate.turn_off
+    metadata: {}
+    target:
+      device_id: eea706b2318bde1a9c660574a32de4e1
+    data: {}
+  mode: single

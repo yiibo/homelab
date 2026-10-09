@@ -1,0 +1,43 @@
+version: "3.8"
+
+networks:
+    homelab:
+        external: true
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+    pihole:
+        container_name: pihole
+        image: pihole/pihole:latest
+        # network_mode: "host"
+        # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+        ports:
+            - "53:53/tcp"
+            - "53:53/udp"
+            - "8053:80/tcp"
+        environment:
+            TZ: "Australia/Melbourne"
+            WEBPASSWORD: "str0ngpassw0rd"
+            FTLCONF_LOCAL_IPV4: 192.168.0.19
+            PIHOLE_UID: 0
+            VIRTUAL_HOST: "pihole.gondor.lan"
+        # Volumes store your data between container upgrades
+        volumes:
+            - "./etc-pihole:/etc/pihole"
+            - "./etc-dnsmasq.d:/etc/dnsmasq.d"
+        #  - './resolv.conf:/etc/resolv.conf'
+        #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+        restart: unless-stopped
+        networks:
+            homelab:
+                ipv4_address: 172.18.0.2
+        labels:
+            - "traefik.enable=true"
+            # 1. Define the web router and attach the domain
+            - "traefik.http.routers.pihole-router.rule=Host(`pihole.gondor.lan`)"
+            - "traefik.http.routers.pihole-router.entrypoints=web"
+            # 2. Bind the router to an explicitly named service block
+            - "traefik.http.routers.pihole-router.service=pihole-service"
+            # 3. Tell the named service to explicitly target internal port 80
+            - "traefik.http.services.pihole-service.loadbalancer.server.port=80"
+            - "traefik.docker.network=homelab"

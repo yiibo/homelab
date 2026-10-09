@@ -1,0 +1,14 @@
+http:
+    routers:
+        homeassistant-router:
+            rule: "Host(`homeassistant.gondor.lan`)"
+            entryPoints:
+                - web
+            service: homeassistant-service
+
+    services:
+        homeassistant-service:
+            loadBalancer:
+                servers:
+                    # Because Home Assistant is on the host network, target your server's physical LAN IP and native port
+                    - url: "http://192.168.0.19:8123"

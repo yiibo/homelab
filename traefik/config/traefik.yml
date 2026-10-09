@@ -1,0 +1,21 @@
+api:
+    dashboard: true
+    insecure: true
+
+entryPoints:
+    web:
+        address: ":80"
+        asDefault: true
+
+providers:
+    docker:
+        endpoint: "unix:///var/run/docker.sock"
+        exposedByDefault: true
+        network: homelab
+
+        defaultRule: "Host(`{{ normalize .ContainerName }}.gondor.lan`)"
+
+    # ADD THIS BLOCK:
+    file:
+        filename: /etc/traefik/dynamic_conf.yml # Traefik looks inside the container for this file
+        watch: true # Allows Traefik to reload changes instantly without restarting
